@@ -1,12 +1,18 @@
 "use strict";
-var TextVenture;
-(function (TextVenture) {
+var TextAdventure;
+(function (TextAdventure) {
+    class Cell {
+    }
+    TextAdventure.Cell = Cell;
+})(TextAdventure || (TextAdventure = {}));
+var TextAdventure;
+(function (TextAdventure) {
     class Character {
     }
-    TextVenture.Character = Character;
-})(TextVenture || (TextVenture = {}));
-var TextVenture;
-(function (TextVenture) {
+    TextAdventure.Character = Character;
+})(TextAdventure || (TextAdventure = {}));
+var TextAdventure;
+(function (TextAdventure) {
     class ConsoleUserInterface {
         constructor(_document) {
             this.document = _document;
@@ -44,15 +50,15 @@ var TextVenture;
             this.document.body.appendChild(wrapper);
         }
     }
-    TextVenture.ConsoleUserInterface = ConsoleUserInterface;
-})(TextVenture || (TextVenture = {}));
+    TextAdventure.ConsoleUserInterface = ConsoleUserInterface;
+})(TextAdventure || (TextAdventure = {}));
 /// <reference path="ConsoleUserInterface.ts" />
-var TextVenture;
+var TextAdventure;
 /// <reference path="ConsoleUserInterface.ts" />
-(function (TextVenture) {
+(function (TextAdventure) {
     class Console {
         constructor(_document) {
-            this.userInterface = new TextVenture.ConsoleUserInterface(_document);
+            this.userInterface = new TextAdventure.ConsoleUserInterface(_document);
         }
         async getInput() {
             const inputExecutor = (_resolve) => {
@@ -73,29 +79,52 @@ var TextVenture;
             this.userInterface.appendToOutput(_text);
         }
     }
-    TextVenture.Console = Console;
-})(TextVenture || (TextVenture = {}));
-var TextVenture;
-(function (TextVenture) {
+    TextAdventure.Console = Console;
+})(TextAdventure || (TextAdventure = {}));
+var TextAdventure;
+(function (TextAdventure) {
+    class Vector2 {
+    }
+    TextAdventure.Vector2 = Vector2;
+})(TextAdventure || (TextAdventure = {}));
+/// <reference path="Cell.ts" />
+/// <reference path="Vector2.ts" />
+var TextAdventure;
+/// <reference path="Cell.ts" />
+/// <reference path="Vector2.ts" />
+(function (TextAdventure) {
+    class Grid {
+        constructor() {
+            this.cells = new Array();
+        }
+        loadGrid(_json) {
+            const gridData = JSON.parse(_json);
+            for (let y; y < gridData.size.y; y++) {
+                for (let x; x < gridData.size.x; x++) {
+                    const cellData = gridData.cells[y][x];
+                    // TO DO create objects of subclasses from Cell
+                    console.log(cellData); // Placeholder
+                }
+            }
+        }
+    }
+    TextAdventure.Grid = Grid;
+})(TextAdventure || (TextAdventure = {}));
+var TextAdventure;
+(function (TextAdventure) {
     class Item {
     }
-    TextVenture.Item = Item;
-})(TextVenture || (TextVenture = {}));
+    TextAdventure.Item = Item;
+})(TextAdventure || (TextAdventure = {}));
 /// <reference path="Console.ts" />
-var TextVenture;
+var TextAdventure;
 /// <reference path="Console.ts" />
-(function (TextVenture) {
+(function (TextAdventure) {
     async function main() {
-        const console = new TextVenture.Console(document);
+        const console = new TextAdventure.Console(document);
         const input = await console.getInput();
         console.log("> ", input);
     }
     main();
-})(TextVenture || (TextVenture = {}));
-var TextVenture;
-(function (TextVenture) {
-    class Tile {
-    }
-    TextVenture.Tile = Tile;
-})(TextVenture || (TextVenture = {}));
+})(TextAdventure || (TextAdventure = {}));
 //# sourceMappingURL=core.js.map
