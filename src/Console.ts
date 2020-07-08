@@ -30,5 +30,10 @@ namespace TextAdventure {
         public log(..._text: Array<string>): void {
             this.userInterface.appendToOutput(_text);
         }
+
+        public exit(): void {
+            this.userInterface.lockInput();
+            this.userInterface.setInput("Text Adventure has been quit.");
+        }
     }
 }

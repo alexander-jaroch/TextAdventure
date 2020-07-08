@@ -20,6 +20,11 @@ namespace TextAdventure {
             this.input.value = _text;
         }
 
+        public lockInput(): void {
+            this.input.disabled = true;
+            this.input.classList.add("locked");
+        }
+
         public appendToOutput(_text: Array<string>): void {
             const textNode: Text = new Text(_text.join(" "));
             const line: HTMLDivElement = this.document.createElement("div");
@@ -30,7 +35,7 @@ namespace TextAdventure {
         public addInputEventListener(_eventListener: InputEventListener): void {
             this.input.addEventListener("keypress", _eventListener);
         }
-        
+
         public removeInputEventListener(_eventListener: InputEventListener): void {
             this.input.removeEventListener("keypress", _eventListener);
         }

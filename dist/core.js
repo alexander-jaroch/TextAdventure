@@ -25,6 +25,10 @@ var TextAdventure;
         setInput(_text = "") {
             this.input.value = _text;
         }
+        lockInput() {
+            this.input.disabled = true;
+            this.input.classList.add("locked");
+        }
         appendToOutput(_text) {
             const textNode = new Text(_text.join(" "));
             const line = this.document.createElement("div");
@@ -78,6 +82,10 @@ var TextAdventure;
         log(..._text) {
             this.userInterface.appendToOutput(_text);
         }
+        exit() {
+            this.userInterface.lockInput();
+            this.userInterface.setInput("Text Adventure has been quit.");
+        }
     }
     TextAdventure.Console = Console;
 })(TextAdventure || (TextAdventure = {}));
@@ -122,8 +130,13 @@ var TextAdventure;
 (function (TextAdventure) {
     async function main() {
         const console = new TextAdventure.Console(document);
-        const input = await console.getInput();
-        console.log("> ", input);
+        const rewrites = await (await fetch("Rewrites.json")).json();
+        let input;
+        do {
+            input = await console.getInput();
+            console.log("> ", input);
+        } while (!rewrites.exit.includes(input));
+        console.exit();
     }
     main();
 })(TextAdventure || (TextAdventure = {}));

@@ -18,3 +18,7 @@
     overflow: hidden;
     width: calc(100% - 2em);
 }
+
+#input__wrapper input.locked {
+    color: #d4b698;
+}
