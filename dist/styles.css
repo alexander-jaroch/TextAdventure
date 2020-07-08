@@ -22,3 +22,7 @@
 #input__wrapper input.locked {
     color: #d4b698;
 }
+
+.error {
+    color: #f22f2f;
+}

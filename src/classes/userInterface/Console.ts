@@ -1,11 +1,9 @@
 /// <reference path="ConsoleUserInterface.ts" />
+/// <reference path="../Types.ts" />
 
 namespace TextAdventure {
-    type Resolve<T> = (_line: T) => void;
-    type Executor<T> = (_resolve: Resolve<T>) => void;
-
     export class Console {
-        public userInterface: ConsoleUserInterface;
+        private userInterface: ConsoleUserInterface;
 
         public constructor(_document: HTMLDocument) {
             this.userInterface = new ConsoleUserInterface(_document);
@@ -13,7 +11,7 @@ namespace TextAdventure {
 
         public async getInput(): Promise<string> {
             const inputExecutor: Executor<string> = (_resolve: Resolve<string>) => {
-                const inputEventListener: InputEventListener = (_event: Event) => {
+                const inputEventListener: EventListener = (_event: Event) => {
                     const event: KeyboardEvent = _event as KeyboardEvent;
                     if (event.key === "Enter") {
                         const input: string = this.userInterface.getInput();
@@ -29,6 +27,10 @@ namespace TextAdventure {
 
         public log(..._text: Array<string>): void {
             this.userInterface.appendToOutput(_text);
+        }
+
+        public error(..._text: Array<string>): void {
+            this.userInterface.appendToOutput(_text, "error");
         }
 
         public exit(): void {

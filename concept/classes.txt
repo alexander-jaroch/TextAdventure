@@ -1,0 +1,72 @@
+@startuml
+class CommandMap<<static>> {
+ + exit(_input: string): boolean
+ + east(_input: string): boolean 
+ + north(_input: string): boolean 
+ + west(_input: string): boolean
+ + south(_input: string): boolean
+}
+
+interface CellData {
+
+}
+
+class Cell {
+ + description: string
+ + accessible: boolean
+ + inside: boolean
+ + constructor(_cellData: CellData)
+}
+
+abstract class Character {
+ + health: number
+}
+
+abstract class Item {
+
+}
+
+class Vector3D {
+ + x: number
+ + y: number
+ + z: number
+ + constructor(_x: number, _y: number, _z: number)
+}
+
+interface GridData {
+ + cells: Array<Array<CellData>>
+ + size: Vector3D
+}
+
+class Grid {
+ + cells: Array<Array<CellData>>
+ + cosntructor()
+ + loadGrid(_gridData: GridData): void
+}
+
+class Console {
+ - userInterface: ConsoleUserInterface
+ + constructor(_document: HTMLDocument)
+ + getInput(): Promise<string>
+ + log(..._text: Array<string>): void
+ + error(..._text: Array<string>): void
+ + exit(): void
+}
+
+class ConsoleUserInterface {
+ - document: HTMLDocument
+ - input: HTMLInputElement
+ - output: HTMLDivElement
+ + constructor(_document: HTMLDocument)
+ + getInput(): string
+ + setInput(_text: string): void
+ + lockInput(): void
+ + appendToOutput(_text: Array<string>, _class: string): void
+ + addInputEventListener(_eventListener: EventListener): void
+ + removeInputEventListener(_eventListener: EventListener): void
+ - createInput(): void;
+ - createOutput(): void;
+}
+
+Console *-- ConsoleUserInterface
+@enduml

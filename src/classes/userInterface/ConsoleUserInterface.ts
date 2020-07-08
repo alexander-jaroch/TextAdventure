@@ -1,6 +1,6 @@
-namespace TextAdventure {
-    export type InputEventListener = (_event: Event) => void;
+/// <reference path="../Types.ts" />
 
+namespace TextAdventure {
     export class ConsoleUserInterface {
         private document: HTMLDocument;
         private input: HTMLInputElement;
@@ -25,24 +25,21 @@ namespace TextAdventure {
             this.input.classList.add("locked");
         }
 
-        public appendToOutput(_text: Array<string>): void {
+        public appendToOutput(_text: Array<string>, _class: string = ""): void {
             const textNode: Text = new Text(_text.join(" "));
             const line: HTMLDivElement = this.document.createElement("div");
             line.appendChild(textNode);
+            if (_class)
+                line.classList.add(..._class.split(" "));
             this.output.appendChild(line);
         }
 
-        public addInputEventListener(_eventListener: InputEventListener): void {
+        public addInputEventListener(_eventListener: EventListener): void {
             this.input.addEventListener("keypress", _eventListener);
         }
 
-        public removeInputEventListener(_eventListener: InputEventListener): void {
+        public removeInputEventListener(_eventListener: EventListener): void {
             this.input.removeEventListener("keypress", _eventListener);
-        }
-
-        private createOutput(): void {
-            this.output = this.document.createElement("div");
-            this.document.body.appendChild(this.output);
         }
 
         private createInput(): void {
@@ -52,6 +49,11 @@ namespace TextAdventure {
             this.input.type = "text";
             wrapper.appendChild(this.input);
             this.document.body.appendChild(wrapper);
+        }
+
+        private createOutput(): void {
+            this.output = this.document.createElement("div");
+            this.document.body.appendChild(this.output);
         }
     }
 }

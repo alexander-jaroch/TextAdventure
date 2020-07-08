@@ -1,17 +1,28 @@
 "use strict";
 var TextAdventure;
 (function (TextAdventure) {
-    class Cell {
+    class CommandMap {
+        static exit(_input) {
+            return /exit|quit|q/.test(_input);
+        }
+        static east(_input) {
+            return /east|go east|e/.test(_input);
+        }
+        static north(_input) {
+            return /north|go north|n/.test(_input);
+        }
+        static west(_input) {
+            return /west|go west|w/.test(_input);
+        }
+        static south(_input) {
+            return /south|go south|s/.test(_input);
+        }
     }
-    TextAdventure.Cell = Cell;
+    TextAdventure.CommandMap = CommandMap;
 })(TextAdventure || (TextAdventure = {}));
+/// <reference path="../Types.ts" />
 var TextAdventure;
-(function (TextAdventure) {
-    class Character {
-    }
-    TextAdventure.Character = Character;
-})(TextAdventure || (TextAdventure = {}));
-var TextAdventure;
+/// <reference path="../Types.ts" />
 (function (TextAdventure) {
     class ConsoleUserInterface {
         constructor(_document) {
@@ -29,10 +40,12 @@ var TextAdventure;
             this.input.disabled = true;
             this.input.classList.add("locked");
         }
-        appendToOutput(_text) {
+        appendToOutput(_text, _class = "") {
             const textNode = new Text(_text.join(" "));
             const line = this.document.createElement("div");
             line.appendChild(textNode);
+            if (_class)
+                line.classList.add(..._class.split(" "));
             this.output.appendChild(line);
         }
         addInputEventListener(_eventListener) {
@@ -40,10 +53,6 @@ var TextAdventure;
         }
         removeInputEventListener(_eventListener) {
             this.input.removeEventListener("keypress", _eventListener);
-        }
-        createOutput() {
-            this.output = this.document.createElement("div");
-            this.document.body.appendChild(this.output);
         }
         createInput() {
             const wrapper = this.document.createElement("div");
@@ -53,12 +62,18 @@ var TextAdventure;
             wrapper.appendChild(this.input);
             this.document.body.appendChild(wrapper);
         }
+        createOutput() {
+            this.output = this.document.createElement("div");
+            this.document.body.appendChild(this.output);
+        }
     }
     TextAdventure.ConsoleUserInterface = ConsoleUserInterface;
 })(TextAdventure || (TextAdventure = {}));
 /// <reference path="ConsoleUserInterface.ts" />
+/// <reference path="../Types.ts" />
 var TextAdventure;
 /// <reference path="ConsoleUserInterface.ts" />
+/// <reference path="../Types.ts" />
 (function (TextAdventure) {
     class Console {
         constructor(_document) {
@@ -82,6 +97,9 @@ var TextAdventure;
         log(..._text) {
             this.userInterface.appendToOutput(_text);
         }
+        error(..._text) {
+            this.userInterface.appendToOutput(_text, "error");
+        }
         exit() {
             this.userInterface.lockInput();
             this.userInterface.setInput("Text Adventure has been quit.");
@@ -89,27 +107,66 @@ var TextAdventure;
     }
     TextAdventure.Console = Console;
 })(TextAdventure || (TextAdventure = {}));
+/// <reference path="classes/CommandMap.ts" />
+/// <reference path="classes/userInterface/Console.ts" />
+var TextAdventure;
+/// <reference path="classes/CommandMap.ts" />
+/// <reference path="classes/userInterface/Console.ts" />
+(function (TextAdventure) {
+    async function main() {
+        const console = new TextAdventure.Console(document);
+        let input;
+        do {
+            input = await console.getInput();
+            console.log(">", input);
+        } while (!TextAdventure.CommandMap.exit(input));
+        console.exit();
+    }
+    main();
+})(TextAdventure || (TextAdventure = {}));
 var TextAdventure;
 (function (TextAdventure) {
-    class Vector2 {
+    class Vector3D {
+        constructor(_x, _y, _z) {
+            this.x = _x;
+            this.y = _y;
+            this.z = _z;
+        }
     }
-    TextAdventure.Vector2 = Vector2;
+    TextAdventure.Vector3D = Vector3D;
 })(TextAdventure || (TextAdventure = {}));
-/// <reference path="Cell.ts" />
-/// <reference path="Vector2.ts" />
+/// <reference path="../cell/CellData.ts" />
 var TextAdventure;
-/// <reference path="Cell.ts" />
-/// <reference path="Vector2.ts" />
+/// <reference path="../cell/CellData.ts" />
+(function (TextAdventure) {
+    class Cell {
+    }
+    TextAdventure.Cell = Cell;
+})(TextAdventure || (TextAdventure = {}));
+var TextAdventure;
+(function (TextAdventure) {
+    class Character {
+    }
+    TextAdventure.Character = Character;
+})(TextAdventure || (TextAdventure = {}));
+/// <reference path="../Vector3D.ts" />
+/// <reference path="../cell/CellData.ts" />
+/// <reference path="../cell/Cell.ts" />
+/// <reference path="../cell/CellData.ts" />
+/// <reference path="./GridData.ts" />
+var TextAdventure;
+/// <reference path="../cell/Cell.ts" />
+/// <reference path="../cell/CellData.ts" />
+/// <reference path="./GridData.ts" />
 (function (TextAdventure) {
     class Grid {
         constructor() {
             this.cells = new Array();
         }
-        loadGrid(_json) {
-            const gridData = JSON.parse(_json);
-            for (let y; y < gridData.size.y; y++) {
-                for (let x; x < gridData.size.x; x++) {
-                    const cellData = gridData.cells[y][x];
+        loadGrid(_gridData) {
+            for (let y; y < _gridData.size.y; y++) {
+                for (let x; x < _gridData.size.x; x++) {
+                    const cellData = _gridData.cells[y][x];
                     // TO DO create objects of subclasses from Cell
                     console.log(cellData); // Placeholder
                 }
@@ -123,21 +180,5 @@ var TextAdventure;
     class Item {
     }
     TextAdventure.Item = Item;
-})(TextAdventure || (TextAdventure = {}));
-/// <reference path="Console.ts" />
-var TextAdventure;
-/// <reference path="Console.ts" />
-(function (TextAdventure) {
-    async function main() {
-        const console = new TextAdventure.Console(document);
-        const rewrites = await (await fetch("Rewrites.json")).json();
-        let input;
-        do {
-            input = await console.getInput();
-            console.log("> ", input);
-        } while (!rewrites.exit.includes(input));
-        console.exit();
-    }
-    main();
 })(TextAdventure || (TextAdventure = {}));
 //# sourceMappingURL=core.js.map
