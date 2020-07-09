@@ -1,4 +1,3 @@
-/// <reference path="classes/CommandMap.ts" />
 /// <reference path="classes/userInterface/Console.ts" />
 
 namespace TextAdventure {
@@ -10,7 +9,7 @@ namespace TextAdventure {
             input = await console.getInput();
             console.log(">", input);
         }
-        while (!CommandMap.exit(input));
+        while (/exit|quit|q/.test(input));
         console.exit();
     }
 
