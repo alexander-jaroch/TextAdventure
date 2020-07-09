@@ -9,7 +9,7 @@ namespace TextAdventure {
             input = await console.getInput();
             console.log(">", input);
         }
-        while (/exit|quit|q/.test(input));
+        while (!/exit|quit|q/.test(input));
         console.exit();
     }
 

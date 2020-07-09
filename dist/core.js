@@ -1,28 +1,7 @@
 "use strict";
+/// <reference path="EventListener.ts" />
 var TextAdventure;
-(function (TextAdventure) {
-    class CommandMap {
-        static exit(_input) {
-            return /exit|quit|q/.test(_input);
-        }
-        static east(_input) {
-            return /east|go east|e/.test(_input);
-        }
-        static north(_input) {
-            return /north|go north|n/.test(_input);
-        }
-        static west(_input) {
-            return /west|go west|w/.test(_input);
-        }
-        static south(_input) {
-            return /south|go south|s/.test(_input);
-        }
-    }
-    TextAdventure.CommandMap = CommandMap;
-})(TextAdventure || (TextAdventure = {}));
-/// <reference path="../Types.ts" />
-var TextAdventure;
-/// <reference path="../Types.ts" />
+/// <reference path="EventListener.ts" />
 (function (TextAdventure) {
     class ConsoleUserInterface {
         constructor(_document) {
@@ -70,10 +49,12 @@ var TextAdventure;
     TextAdventure.ConsoleUserInterface = ConsoleUserInterface;
 })(TextAdventure || (TextAdventure = {}));
 /// <reference path="ConsoleUserInterface.ts" />
-/// <reference path="../Types.ts" />
+/// <reference path="Executor.ts" />
+/// <reference path="Resolve.ts" />
 var TextAdventure;
 /// <reference path="ConsoleUserInterface.ts" />
-/// <reference path="../Types.ts" />
+/// <reference path="Executor.ts" />
+/// <reference path="Resolve.ts" />
 (function (TextAdventure) {
     class Console {
         constructor(_document) {
@@ -107,10 +88,8 @@ var TextAdventure;
     }
     TextAdventure.Console = Console;
 })(TextAdventure || (TextAdventure = {}));
-/// <reference path="classes/CommandMap.ts" />
 /// <reference path="classes/userInterface/Console.ts" />
 var TextAdventure;
-/// <reference path="classes/CommandMap.ts" />
 /// <reference path="classes/userInterface/Console.ts" />
 (function (TextAdventure) {
     async function main() {
@@ -119,66 +98,9 @@ var TextAdventure;
         do {
             input = await console.getInput();
             console.log(">", input);
-        } while (!TextAdventure.CommandMap.exit(input));
+        } while (!/exit|quit|q/.test(input));
         console.exit();
     }
     main();
-})(TextAdventure || (TextAdventure = {}));
-var TextAdventure;
-(function (TextAdventure) {
-    class Vector3D {
-        constructor(_x, _y, _z) {
-            this.x = _x;
-            this.y = _y;
-            this.z = _z;
-        }
-    }
-    TextAdventure.Vector3D = Vector3D;
-})(TextAdventure || (TextAdventure = {}));
-/// <reference path="../cell/CellData.ts" />
-var TextAdventure;
-/// <reference path="../cell/CellData.ts" />
-(function (TextAdventure) {
-    class Cell {
-    }
-    TextAdventure.Cell = Cell;
-})(TextAdventure || (TextAdventure = {}));
-var TextAdventure;
-(function (TextAdventure) {
-    class Character {
-    }
-    TextAdventure.Character = Character;
-})(TextAdventure || (TextAdventure = {}));
-/// <reference path="../Vector3D.ts" />
-/// <reference path="../cell/CellData.ts" />
-/// <reference path="../cell/Cell.ts" />
-/// <reference path="../cell/CellData.ts" />
-/// <reference path="./GridData.ts" />
-var TextAdventure;
-/// <reference path="../cell/Cell.ts" />
-/// <reference path="../cell/CellData.ts" />
-/// <reference path="./GridData.ts" />
-(function (TextAdventure) {
-    class Grid {
-        constructor() {
-            this.cells = new Array();
-        }
-        loadGrid(_gridData) {
-            for (let y; y < _gridData.size.y; y++) {
-                for (let x; x < _gridData.size.x; x++) {
-                    const cellData = _gridData.cells[y][x];
-                    // TO DO create objects of subclasses from Cell
-                    console.log(cellData); // Placeholder
-                }
-            }
-        }
-    }
-    TextAdventure.Grid = Grid;
-})(TextAdventure || (TextAdventure = {}));
-var TextAdventure;
-(function (TextAdventure) {
-    class Item {
-    }
-    TextAdventure.Item = Item;
 })(TextAdventure || (TextAdventure = {}));
 //# sourceMappingURL=core.js.map
