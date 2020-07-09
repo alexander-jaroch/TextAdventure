@@ -1,4 +1,4 @@
-/// <reference path="../Types.ts" />
+/// <reference path="EventListener.ts" />
 
 namespace TextAdventure {
     export class ConsoleUserInterface {

@@ -1,5 +1,6 @@
 /// <reference path="ConsoleUserInterface.ts" />
-/// <reference path="../Types.ts" />
+/// <reference path="Executor.ts" />
+/// <reference path="Resolve.ts" />
 
 namespace TextAdventure {
     export class Console {
