@@ -1,0 +1,25 @@
+{
+    "type": "NPC",
+    "id": "character:companion",
+    "name": "Companion",
+    "story": {
+        "description": [
+            "You look at your companion. They are an ordinary human."
+        ],
+        "wounded": [
+            "Your companion is wounded. They need some rest."
+        ],
+        "dead": [
+            "You stare at your companion's dead body. There is nothing you can do."
+        ]
+    },
+    "relation": 100,
+    "stats": {
+        "health": 125,
+        "attack": 20,
+        "defense": 0,
+        "evasion": 75
+    },
+    "effects": [],
+    "inventory": []
+}

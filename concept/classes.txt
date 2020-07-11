@@ -1,72 +1,269 @@
 @startuml
-class CommandMap<<static>> {
- + exit(_input: string): boolean
- + east(_input: string): boolean 
- + north(_input: string): boolean 
- + west(_input: string): boolean
- + south(_input: string): boolean
-}
-
-interface CellData {
-
-}
-
-class Cell {
- + description: string
- + accessible: boolean
- + inside: boolean
- + constructor(_cellData: CellData)
-}
-
-abstract class Character {
- + health: number
-}
-
-abstract class Item {
-
-}
-
-class Vector3D {
- + x: number
- + y: number
- + z: number
- + constructor(_x: number, _y: number, _z: number)
-}
-
-interface GridData {
- + cells: Array<Array<CellData>>
- + size: Vector3D
-}
-
-class Grid {
- + cells: Array<Array<CellData>>
- + cosntructor()
- + loadGrid(_gridData: GridData): void
-}
-
+' ================================================================
+' Console (User Interface)
+' ================================================================
 class Console {
- - userInterface: ConsoleUserInterface
- + constructor(_document: HTMLDocument)
- + getInput(): Promise<string>
- + log(..._text: Array<string>): void
- + error(..._text: Array<string>): void
- + exit(): void
+    - userInterface: ConsoleUserInterface
+    + constructor(_document: HTMLDocument)
+    + getInput(): Promise<string>
+    + log(..._text: Array<string>): void
+    + error(..._text: Array<string>): void
+    + exit(): void
 }
 
 class ConsoleUserInterface {
- - document: HTMLDocument
- - input: HTMLInputElement
- - output: HTMLDivElement
- + constructor(_document: HTMLDocument)
- + getInput(): string
- + setInput(_text: string): void
- + lockInput(): void
- + appendToOutput(_text: Array<string>, _class: string): void
- + addInputEventListener(_eventListener: EventListener): void
- + removeInputEventListener(_eventListener: EventListener): void
- - createInput(): void;
- - createOutput(): void;
+    - document: HTMLDocument
+    - input: HTMLInputElement
+    - output: HTMLDivElement
+    + constructor(_document: HTMLDocument)
+    + getInput(): string
+    + setInput(_text: string): void
+    + lockInput(): void
+    + appendToOutput(_text: Array<string>, _class: string): void
+    + addInputEventListener(_eventListener: EventListener): void
+    + removeInputEventListener(_eventListener: EventListener): void
+    - createInput(): void;
+    - createOutput(): void;
+}
+Console *-- ConsoleUserInterface
+
+class Main {
+
+}
+Main *-- Console
+Main *-- Grid
+
+
+' ================================================================
+' Directions
+' ================================================================
+interface Directions<T><<generic>> {
+    + up: T
+    + east: T
+    + north: T
+    + west: T
+    + south: T
+    + down: T
 }
 
-Console *-- ConsoleUserInterface
+
+' ================================================================
+' Story
+' ================================================================
+interface Story {
+    + description: string
+}
+
+interface CellStory extends Story {
+    + inaccessible: string 
+}
+
+interface UsableItemStory extends Story {
+    + used: string
+}
+
+interface AttachableItemStory extends Story {
+    + damaged: string
+    + destroyed: string    
+}
+
+' ================================================================
+' Stats
+' ================================================================
+interface StatData {
+    + maximum: number
+    + current: number
+}
+
+interface StatInitData extends StatData {
+    + name: string
+    + story: Story
+}
+StatInitData o-- Story
+
+class Stat {
+    - name: string
+    - story: Story
+    + maximum: number
+    + current: number
+    + constructor(_name: string, _story: Story, _maximum: number, _current: number)
+    + getName(): string
+    + getStory(): Story
+}
+Stat o-- Story
+
+interface StatListData {
+    + health: StatData
+    + defense: StatData
+    + attack: StatData
+}
+StatListData o-- StatData
+
+class StatList {
+    + health: Stat
+    + defense: Stat
+    + attack: Stat
+    + constructor(_health: Stat, _defense: Stat, _attack: Stat)
+}
+StatList o-- Stat
+
+interface EffectData {
+    + statList: StatListData
+    + duration: number
+}
+EffectData o-- StatListData
+
+interface EffectInitData extends EffectData {
+    + name: string
+    + story: Story
+}
+EffectInitData o-- Story
+
+class Effect {
+    - name: string
+    - story: Story
+    + statList: StatList
+    + duration: number
+    + constructor(_statList: StatList, _duration: number)
+    + getName(): string
+    + getStory(): Story
+}
+Effect o-- Story
+Effect o-- StatList
+
+
+' ================================================================
+' Items & Inventory
+' ================================================================
+enum ItemSlot {
+    + Primary
+    + Secondary
+    + Head
+    + Torso
+    + Legs
+}
+
+interface ItemData {
+    + id: string    
+}
+
+interface ItemInitData extends ItemData {
+    + name: string
+    + story: Story
+}
+ItemInitData o-- Story
+
+interface UsableItemData extends ItemData {
+    + effect: EffectData
+}
+UsableItemData o-- EffectData
+
+interface AttachableItemData extends Item {
+    + statList: StatListData
+    + itemSlot: ItemSlot
+}
+AttachableItemData o-- StatListData
+AttachableItemData o-- ItemSlot
+
+abstract class Item {
+    # id: string
+    # name: string
+    # constructor(_id: string, _name: string)
+    + getId(): string
+    + getName(): string
+}
+
+class UsableItem extends Item {
+    - story: UsableItemStory
+    + effect: Effect
+    + constructor(_id: string, _name: string, _effect: Effect)
+    + getStory(): UsableItemStory
+}
+UsableItem o-- Effect
+UsableItem o-- UsableItemStory
+
+class AttachableItem extends Item {
+    - story: AttachableItemStory
+    + statList: StatList
+    + itemSlot: ItemSlot
+    + constructor(_id: string, _name: string, _statList: StatList)
+    + getStory(): AttachableItemStory
+}
+AttachableItem o-- StatList
+AttachableItem o-- ItemSlot
+AttachableItem o-- AttachableItemStory
+
+
+' ================================================================
+' Inventory
+' ================================================================
+interface InventoryData {
+    + items: Array<ItemData>
+}
+InventoryData o-- ItemData
+
+class Inventory {
+    + items: Array<Item>
+    + constructor(_items: Array<Item>)
+}
+Inventory o-- Item
+
+
+' ================================================================
+' Event System
+' ================================================================
+abstract class Event {
+    # id: string
+    # constructor(_id: string)
+}
+
+
+' ================================================================
+' Cell & Grid
+' ================================================================
+interface CellData {
+    + id: string
+    + accesible: boolean
+    + characters: Array<string>
+    + inventory: InventoryData
+}
+CellData o-- InventoryData
+
+interface CellInitData extends CellData {
+    + name: string
+    + neighborIds: Directions<string>
+    + story: CellStory
+}
+CellInitData o-- Directions
+CellInitData o-- CellStory
+
+class Cell {
+    - id: string
+    - name: string
+    + accesible
+    + neighbors: Directions<Cell>
+    + characters: Array<Character>
+    + inventory: Inventory
+    + story: CellStory    
+    + constructor(_id: string)
+    + getId(): string
+    + getName(): string
+}
+Cell o-- Directions
+Cell o-- Character
+Cell o-- Inventory
+Cell o-- CellStory
+
+class Grid {
+    - cells: Array<Cell>
+    - characters: Array<Character>
+    + constructor()
+    + init(Array<CellInitData>): void
+    + load(Array<CellData>): void
+    + save(): Array<CellData>
+}
+Grid o-- Cell
+Grid o-- CellData
+Grid o-- CellInitData
+Grid o-- Character
 @enduml

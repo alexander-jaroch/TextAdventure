@@ -1,0 +1,28 @@
+{
+    "type": "NPCTrader",
+    "id": "character:trader",
+    "name": "Trader",
+    "story": {
+        "description": [
+            "You're looking at the trader. They are an orninary human."
+        ],
+        "wounded": [
+            "The trader is wounded. They need some rest."
+        ],
+        "dead": [
+            "The trader is dead."
+        ]
+    },
+    "relation": 0,
+    "stats": {
+        "health": 100,
+        "attack": 20,
+        "defense": 5,
+        "evasion": 75
+    },
+    "effects": [],
+    "inventory": [
+        "sword:short_sword",
+        "shield:simple_shield"
+    ]
+}

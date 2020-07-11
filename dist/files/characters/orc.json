@@ -1,0 +1,27 @@
+{
+    "type": "NPC",
+    "id": "character:orc",
+    "name": "Orc",
+    "story": {
+        "description": [
+            "This is an orc. An thick-skinned race."
+        ],
+        "wounded": [
+            "It is wounded."
+        ],
+        "dead": [
+            "You see a dead orc. Maybe it has some loot."
+        ]
+    },
+    "relation": -100,
+    "stats": {
+        "health": 200,
+        "attack": 50,
+        "defense": 25,
+        "evasion": 25
+    },
+    "effects": [],
+    "inventory": [
+        "sword:long_sword"
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "type": "Equippable",
+    "id": "sword:long_sword",
+    "name": "Long Sword",
+    "story": {
+        "description": [
+            "This is very heavy %name. You'll have to properly swing it. "
+        ],
+        "equipped": [
+            "You've equipped %name as your %slot weapon"
+        ],
+        "damaged": [
+            "Your %name is not looking good."
+        ],
+        "destroyed": [
+            "Your %name is no more."
+        ]
+    },
+    "stats": {
+        "health": 125,
+        "attack": 50,
+        "defense": 10,
+        "evasion": -10
+    },
+    "slots": [
+        "Primary",
+        "Secondary"
+    ]
+}

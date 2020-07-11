@@ -1,0 +1,12 @@
+[
+    {
+        "id": "action:block_start",
+        "story": {
+            "description": "The roof crumbles. Your way back has been blocked."
+        },
+        "condition": "lockCell",
+        "cell": "cell:start",
+        "next": [],
+        "done": false
+    }
+]

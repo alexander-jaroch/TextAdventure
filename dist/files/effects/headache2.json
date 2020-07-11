@@ -1,0 +1,17 @@
+{
+    "id": "effect:strong_headache",
+    "name": "Headache",
+    "story": {
+        "description": "Your headache got better."
+    },
+    "stats": {
+        "health": -25,
+        "attack": -10,
+        "defense": -10,
+        "evasion": 0
+    },
+    "duration": 6,
+    "next": [
+        ""
+    ]
+}
