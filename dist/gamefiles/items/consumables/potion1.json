@@ -1,0 +1,19 @@
+{
+    "type": "Consumable",
+    "id": "potion:rum",
+    "name": "Rum",
+    "story": {
+        "description": [
+            "This is rum with 40%% alcohol."
+        ],
+        "usedByPlayer": [
+            "You've emptied the whole bottle! You've got there a serious problem!"
+        ],
+        "usedOnPlayer": [],
+        "usedOnOther": []
+    },
+    "throwable": false,
+    "effects": [
+        "effect:drunk_on_rum"
+    ]
+}

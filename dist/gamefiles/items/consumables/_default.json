@@ -1,0 +1,13 @@
+{
+    "type": "Consumable",
+    "id": "consumable:default",
+    "name": "Default Potion",
+    "story": {
+        "description": [],
+        "usedByPlayer": [],
+        "usedOnPlayer": [],
+        "usedOnOther": []
+    },
+    "throwable": false,
+    "effects": []
+}

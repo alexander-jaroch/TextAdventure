@@ -1,0 +1,31 @@
+{
+    "id": "cell:exit",
+    "name": "Exit of Cave",
+    "accessible": false,
+    "neighbors": {
+        "up": "",
+        "east": "cell:start",
+        "north": "",
+        "west": "",
+        "south": "",
+        "down": ""
+    },
+    "characters": [
+        "character:orc"
+    ],
+    "story": {
+        "description": [
+            "This is the exit, you're free!"
+        ],
+        "inaccessible": [
+            "It's locked! You need a key."
+        ]
+    },
+    "events": {
+        "onLeave": [],
+        "onUseItem": [
+            "event:unlock_exit"
+        ]
+    },
+    "inventory": []
+}

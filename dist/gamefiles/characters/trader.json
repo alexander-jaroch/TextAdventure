@@ -1,0 +1,36 @@
+{
+    "type": "NPCTrader",
+    "id": "character:trader",
+    "name": "Trader",
+    "story": {
+        "description": [
+            "You're looking at the trader. They are an orninary human."
+        ],
+        "wounded": [
+            "The trader is wounded. They need some rest."
+        ],
+        "dead": [
+            "The trader is dead."
+        ]
+    },
+    "relation": 0,
+    "stats": {
+        "health": 100,
+        "energy": 100,
+        "attack": 20,
+        "defense": 5,
+        "evasion": 75
+    },
+    "events": {
+        "onDeath": []
+    },
+    "effects": [],
+    "equipment": [
+        "sword:short_sword",
+        "shield:simple_shield"
+    ],
+    "inventory": [
+        "potion:rum 20"
+    ],
+    "inventorySize": 25
+}

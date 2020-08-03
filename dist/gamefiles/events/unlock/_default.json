@@ -1,0 +1,10 @@
+{
+    "id": "event:default_unlock",
+    "action": "unlock",
+    "item": "key:default",
+    "story": {
+        "description": [],
+        "success": [],
+        "failure": []
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "type": "Equippable",
+    "id": "equippable:default",
+    "name": "Default Equippable",
+    "story": {
+        "description": [],
+        "usedByPlayer": [],
+        "usedOnPlayer": [],
+        "usedOnOther": []
+    },
+    "stats": {
+        "health": 100,
+        "attack": 50,
+        "defense": 25,
+        "evasion": 0
+    },
+    "slots": []
+}

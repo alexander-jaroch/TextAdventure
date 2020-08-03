@@ -1,0 +1,34 @@
+{
+    "type": "Player",
+    "id": "player",
+    "name": "Player",
+    "story": {
+        "description": [
+            "You call yourself %name. You're an ordinary human."
+        ],
+        "wounded": [
+            "You're wounded pretty bad."
+        ],
+        "dead": [
+            "You're dead. Game Over!"
+        ]
+    },
+    "relation": 0,
+    "stats": {
+        "health": 100,
+        "energy": 100,
+        "attack": 25,
+        "defense": 0,
+        "evasion": 75
+    },
+    "events": {
+        "onDeath": []
+    },
+    "effects": [
+        "effect:drunk_on_rum",
+        "effect:headache"
+    ],
+    "equipment": [],
+    "inventory": [],
+    "inventorySize": 9
+}

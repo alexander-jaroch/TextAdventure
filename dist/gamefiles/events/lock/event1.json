@@ -1,0 +1,9 @@
+{
+    "id": "event:lock_start",
+    "action": "lock",
+    "story": {
+        "description": [
+            "The roof crumbles. Your way back has been blocked."
+        ]
+    }
+}

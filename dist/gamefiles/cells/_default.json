@@ -1,0 +1,23 @@
+{
+    "id": "cell:default",
+    "name": "Default Cell",
+    "accessible": true,
+    "neighbors": {
+        "up": "",
+        "east": "",
+        "north": "",
+        "west": "",
+        "south": "",
+        "down": ""
+    },
+    "characters": [],
+    "story": {
+        "description": [],
+        "inaccessible": []
+    },
+    "events": {
+        "onLeave": [],
+        "onUseItem": []
+    },
+    "inventory": []
+}

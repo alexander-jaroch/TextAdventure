@@ -1,0 +1,25 @@
+{
+    "type": "NPC",
+    "id": "character:default",
+    "name": "Default Character",
+    "story": {
+        "description": [],
+        "wounded": [],
+        "dead": []
+    },
+    "relation": 0,
+    "stats": {
+        "health": 100,
+        "energy": 100,
+        "attack": 20,
+        "defense": 0,
+        "evasion": 75
+    },
+    "events": {
+        "onDeath": []
+    },
+    "effects": [],
+    "equipment": [],
+    "inventory": [],
+    "inventorySize": 9
+}

@@ -1,0 +1,28 @@
+{
+    "type": "Equippable",
+    "id": "shield:simple_shiled",
+    "name": "Simple Shield",
+    "story": {
+        "description": [
+            "This is a %name."
+        ],
+        "usedByPlayer": [
+            "You've blocked %enemys attack!"
+        ],
+        "usedOnPlayer": [
+            "%enemy has blocked your attack!"
+        ],
+        "usedOnOther": [
+            "%enemy has blocked %others attack!"
+        ]
+    },
+    "stats": {
+        "health": 200,
+        "attack": 5,
+        "defense": 50,
+        "evasion": -10
+    },
+    "slots": [
+        "Secondary"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "type": "Prop",
+    "id": "key:exit_key",
+    "name": "Key to the Exit",
+    "story": {
+        "description": [
+            "This is the key to the exit."
+        ]
+    }
+}

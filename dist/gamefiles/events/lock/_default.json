@@ -1,0 +1,7 @@
+{
+    "id": "event:default_lock",
+    "action": "lock",
+    "story": {
+        "description": []
+    }
+}

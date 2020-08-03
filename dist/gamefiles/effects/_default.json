@@ -1,0 +1,16 @@
+{
+    "id": "effect:default",
+    "name": "Default Effect",
+    "story": {
+        "description": []
+    },
+    "stats": {
+        "health": 50,
+        "energy": -50,
+        "attack": -25,
+        "defense": -25,
+        "evasion": -25
+    },
+    "duration": 8,
+    "next": []
+}

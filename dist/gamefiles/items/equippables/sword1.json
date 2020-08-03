@@ -1,0 +1,28 @@
+{
+    "type": "Equippable",
+    "id": "sword:short_sword",
+    "name": "Short Sword",
+    "story": {
+        "description": [
+            "This is a simple %name."
+        ],
+        "usedByPlayer": [
+            "You've swung your sword at %enemy!"
+        ],
+        "usedOnPlayer": [
+            "%enemy has swung at you!"
+        ],
+        "usedOnOther": [
+            "%enemy has swung at %other!"
+        ]
+    },
+    "stats": {
+        "health": 100,
+        "attack": 25,
+        "defense": 5,
+        "evasion": -5
+    },
+    "slots": [
+        "Primary"
+    ]
+}

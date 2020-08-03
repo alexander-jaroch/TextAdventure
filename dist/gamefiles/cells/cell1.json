@@ -1,0 +1,33 @@
+{
+    "id": "cell:start",
+    "name": "Dark Cave",
+    "accessible": true,
+    "neighbors": {
+        "up": "",
+        "east": "",
+        "north": "",
+        "west": "cell:exit",
+        "south": "",
+        "down": ""
+    },
+    "characters": [
+        "player"
+    ],
+    "story": {
+        "description": [
+            "Dark Cave, dimly lit."
+        ],
+        "inaccessible": [
+            "A large boulder is blocking your way back."
+        ]
+    },
+    "events": {
+        "onLeave": [
+            "event:lock_start"
+        ],
+        "onUseItem": []
+    },
+    "inventory": [
+        "key:exit_key"
+    ]
+}

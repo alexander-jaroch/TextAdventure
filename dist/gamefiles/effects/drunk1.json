@@ -1,0 +1,18 @@
+{
+    "id": "effect:drunk_on_rum",
+    "name": "Drunk on Rum",
+    "story": {
+        "description": [
+            "You've drunk a whole buttle of Rum"
+        ]
+    },
+    "stats": {
+        "health": 50,
+        "energy": -50,
+        "attack": -25,
+        "defense": -25,
+        "evasion": -25
+    },
+    "duration": 8,
+    "next": []
+}
